@@ -24,21 +24,25 @@
 	<h3>Add A New Author</h3>
 
 	<form action="#" th:action="@{/authors/newAuthor}" method="post" th:object="${newAuthor}">
-	
+	<p>
 	<label for="firstName">First Name:</label>
-	<input type="text" th:field="*{firstName}"/>
-	
+	<input id="firstName" type="text" th:field="*{firstName}"/>
+	</p>
+	<p>
 	<label for="middleInitial">Middle Initial:</label>
-	<input type="text" th:field="*{middleInitial}"/>
-	
+	<input id="middleInitial" type="text" th:field="*{middleInitial}"/>
+	</p>
+	<p>
 	<label for="lastName">Last Name:</label>
-	<input type="text" th:field="*{lastName}"/>
-	
+	<input id="lastName" type="text" th:field="*{lastName}"/>
+	</p>
+	<p>
 	<label for="university">University:</label>
-	<input type="text" th:field="*{university}"/>
-	
+	<input id="university" type="text" th:field="*{university}"/>
+	</p>
+	<p>
 	<input type="submit" />
-	
+	</p>
 	</form>
 	
 </div>

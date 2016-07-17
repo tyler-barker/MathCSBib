@@ -16,6 +16,13 @@ body {
 }
 
 
+
+form  { display: table; 
+		line-height: 30px;   }
+p     { display: table-row;  }
+label { display: table-cell; }
+input { display: table-cell; }
+
 #navigation {
         height: 25px;
         width:800px;
