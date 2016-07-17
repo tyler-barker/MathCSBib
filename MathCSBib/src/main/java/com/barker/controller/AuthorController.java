@@ -43,7 +43,9 @@ public class AuthorController {
 	@RequestMapping("/{authorId}")
 	public String getAuthor(@PathVariable("authorId") long authorId, Model model) {
 		AuthorDAO authorDAO = ctx.getBean(AuthorDAO.class);
-		model.addAttribute("author", authorDAO.getAuthor(authorId));
+		Author author = authorDAO.getAuthor(authorId);
+		model.addAttribute("author", author);
+		model.addAttribute("publications", authorDAO.getPublicationsFromAuthor(authorId));
 		return "AuthorPage";
 	}
 

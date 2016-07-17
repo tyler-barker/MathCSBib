@@ -30,17 +30,30 @@ public class MathCsBibApplication {
 		author.setLastName("Barker");
 		author.setMiddleInitial("C");
 		author.setUniversity("Tulane");
+		authorDAO.save(author);
+		
+		Author author2 = new Author();
+		author2.setFirstName("Michael");
+		author2.setLastName("Mislove");
+		author2.setUniversity("Tulane");
+		authorDAO.save(author2);
+		
 		pub.setTitle("A Monad for Randomized Algorithms");
 		pub.setUrl("http://cs.tulane.edu/~tbarker/files/dissertation.pdf");
 		pub.getAuthors().add(author);
 		Publication pub2 = new Publication();
 		pub2.setTitle("Paper 2");
 		pub2.getAuthors().add(author);
+		pub2.getAuthors().add(author2);
+		author.getPublications().add(pub);
+		author.getPublications().add(pub2);
+		author2.getPublications().add(pub2);
 		
-		authorDAO.save(author);
+		
 		pubDAO.save(pub);
 		pubDAO.save(pub2);
-		
+		authorDAO.save(author);
+		authorDAO.save(author2);
 		
 	}
 	

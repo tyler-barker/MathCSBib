@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.barker.model.Author;
+import com.barker.model.Publication;
 
 @Repository
 @Transactional
@@ -32,6 +33,11 @@ public class AuthorDAO {
 	@SuppressWarnings("unchecked")
 	public List<Author> getAuthors() {
 		return sf.getCurrentSession().createQuery("from Author").list();
+	}
+	
+	public List<Publication> getPublicationsFromAuthor(long id) {
+		Author author = (Author) sf.getCurrentSession().get(Author.class, id);
+		return author.getPublications();
 	}
 
 }

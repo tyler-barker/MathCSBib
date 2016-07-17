@@ -26,6 +26,16 @@
 	Last Name: <span th:text="${author.lastName}"></span><br></br>
 	University: <span th:text="${author.university}"></span><br></br>
 	
+	<div class="hr"> <hr /> </div>
+	
+	<h3>Publications</h3>
+	<table>
+	<tr th:each="pub : ${publications}">
+        <td> <a th:href="@{/publications/{id}(id=${pub.pubId})}">[[${pub.title}]]</a></td>
+        
+    </tr>
+    </table>
+	
 </div>
 </body>
 </html>

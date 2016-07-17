@@ -1,5 +1,7 @@
 package com.barker.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.barker.dao.PublicationDAO;
+import com.barker.model.Author;
 import com.barker.model.Publication;
 
 @Controller
@@ -43,7 +46,14 @@ public class PublicationController {
 	@RequestMapping("/{pubId}")
 	public String getPublication(@PathVariable("pubId") long pubId, Model model) {
 		PublicationDAO pubDAO = ctx.getBean(PublicationDAO.class);
-		model.addAttribute("publication", pubDAO.getPublication(pubId));
+		Publication pub = pubDAO.getPublication(pubId);
+		model.addAttribute("publication", pub);
+		List<Author> authors = pubDAO.getAuthorsFromPublication(pubId);
+		model.addAttribute("authors", authors);
+		if (authors.size() > 1)
+			model.addAttribute("authorText", "Authors");
+		else
+			model.addAttribute("authorText", "Author");
 		return "PublicationPage";
 	}
 	

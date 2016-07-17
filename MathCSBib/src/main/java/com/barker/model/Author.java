@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -16,7 +17,7 @@ public class Author {
 	private String middleInitial;
 	@Id @GeneratedValue
 	private long authorId;
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Publication> publications = new ArrayList<Publication>();
 	private String picture;
 	private String university;

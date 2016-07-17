@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -15,7 +16,7 @@ public class Publication {
 	private String title;
 	@Id @GeneratedValue
 	private long pubId;
-	@ManyToMany
+	@ManyToMany(mappedBy="publications", fetch = FetchType.EAGER)
 	private List<Author> authors = new ArrayList<Author>();
 	@ElementCollection
 	private List<String> topics = new ArrayList<String>();
