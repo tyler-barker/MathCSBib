@@ -24,6 +24,11 @@ public class AuthorDAO {
 		sf.getCurrentSession().saveOrUpdate(author);
 	}
 	
+	public Author getAuthor(long id) {
+		Author author = (Author) sf.getCurrentSession().get(Author.class, id);
+		return author;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Author> getAuthors() {
 		return sf.getCurrentSession().createQuery("from Author").list();

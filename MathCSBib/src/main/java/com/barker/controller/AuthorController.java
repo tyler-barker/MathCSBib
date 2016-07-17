@@ -5,6 +5,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -37,6 +38,13 @@ public class AuthorController {
 		AuthorDAO authorDAO = ctx.getBean(AuthorDAO.class);
 		model.addAttribute("authors", authorDAO.getAuthors());
 		return "AuthorsPage";
+	}
+	
+	@RequestMapping("/{authorId}")
+	public String getAuthor(@PathVariable("authorId") long authorId, Model model) {
+		AuthorDAO authorDAO = ctx.getBean(AuthorDAO.class);
+		model.addAttribute("author", authorDAO.getAuthor(authorId));
+		return "AuthorPage";
 	}
 
 }

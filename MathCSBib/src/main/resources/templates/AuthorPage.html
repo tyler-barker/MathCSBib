@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1"></meta>
-<title>MathCSBib</title>
-<link th:href="@{~/mainStyle.css}" rel="stylesheet" type="text/css" />  
+<title>Publication</title>
+<link th:href="@{~/mainStyle.css}" rel="stylesheet" type="text/css" /> 
 </head>
 <body th:inline="text">
 
@@ -19,11 +19,12 @@
 </div>
 
 <div id="main">
-	<h1>Author Added!</h1>
+	<h1>Author</h1>
 
-	<span th:text="${newAuthor.firstName}"></span> <span th:text="${newAuthor.lastName}"></span> has been added.<br></br>
-	
-	<a th:href="@{/authors/{id}(id=${newAuthor.authorId})}">Go to author's page.</a>
+	First Name: <span th:text="${author.firstName}"></span><br></br>
+	Middle Initial: <span th:text="${author.middleInitial}"></span><br></br>
+	Last Name: <span th:text="${author.lastName}"></span><br></br>
+	University: <span th:text="${author.university}"></span><br></br>
 	
 </div>
 </body>
