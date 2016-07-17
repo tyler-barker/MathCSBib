@@ -16,15 +16,38 @@
 </tr>
 </table>
 
+<div class="hr"> <hr /> </div>
+
+</div>
+
+<div id="name">
+	[[${author.firstName}]] [[${author.lastName}]]
 </div>
 
 <div id="main">
-	<h1>Author</h1>
-
-	First Name: <span th:text="${author.firstName}"></span><br></br>
-	Middle Initial: <span th:text="${author.middleInitial}"></span><br></br>
-	Last Name: <span th:text="${author.lastName}"></span><br></br>
-	University: <span th:text="${author.university}"></span><br></br>
+	
+	
+<table>
+   <tr>
+      <td>
+	
+		<img th:src="@{{url}(url=${author.picture})}" width="300" ></img>
+	
+      </td>
+      <td>	
+			<table>
+			<tr><td><bold>First Name:</bold> <span th:text="${author.firstName}"></span></td></tr>	
+			<tr><td><bold>Middle Initial:</bold> <span th:text="${author.middleInitial}"></span></td></tr>
+			<tr><td><bold>Last Name:</bold> <span th:text="${author.lastName}"></span></td></tr>
+			<tr><td><bold>University:</bold> <span th:text="${author.university}"></span></td></tr>
+			
+			</table>
+	
+	  </td>
+   </tr>
+</table>
+	
+	<div class="center">
 	
 	<div class="hr"> <hr /> </div>
 	
@@ -35,6 +58,8 @@
         
     </tr>
     </table>
+    
+    </div>
 	
 </div>
 </body>
