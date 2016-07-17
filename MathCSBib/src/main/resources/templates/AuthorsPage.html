@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"></meta>
+<title>Authors</title>
+<link th:href="@{~/mainStyle.css}" rel="stylesheet" type="text/css" /> 
+</head>
+<body th:inline="text">
+
+<div id="navigation">
+<table>
+<tr>
+<td><a th:href="@{~/index.html}">Home</a></td>
+<td><a th:href="@{~/publications}">Publications</a></td>
+<td><a th:href="@{~/authors}">Authors</a></td>
+</tr>
+</table>
+
+</div>
+
+<div id="main">
+
+	<h1>Authors</h1>
+	<table>
+	<tr th:each="author : ${authors}">
+		<td> <a th:href="@{/authors/{id}(id=${author.authorId})}">[[${author.firstName}]] [[${author.lastName}]]</a></td>
+    </tr>
+    </table>
+    
+    <div class="hr"> <hr /> </div>
+    
+   	<a href="/newAuthor">Add new author</a>
+    
+</div>
+
+
+</body>
+</html>

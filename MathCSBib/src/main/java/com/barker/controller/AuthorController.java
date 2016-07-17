@@ -34,6 +34,8 @@ public class AuthorController {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public String getAuthors(Model model) {
+		AuthorDAO authorDAO = ctx.getBean(AuthorDAO.class);
+		model.addAttribute("authors", authorDAO.getAuthors());
 		return "AuthorsPage";
 	}
 
