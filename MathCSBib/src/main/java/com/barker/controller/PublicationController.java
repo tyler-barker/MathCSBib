@@ -5,6 +5,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -21,7 +22,7 @@ public class PublicationController {
 	@RequestMapping(value="/newPublication", method=RequestMethod.GET)
 	public String getNewPublicationForm(Model model) {
 		model.addAttribute("newPublication", new Publication());
-		return "NewPublicationsForm";
+		return "NewPublicationForm";
 	}
 	
 	@RequestMapping(value="/newPublication", method=RequestMethod.POST)
@@ -39,16 +40,11 @@ public class PublicationController {
 		return "PublicationsPage";
 	}
 	
-//	@RequestMapping("/{pubId}")
-//	public String getPublication(@PathVariable("pubId") String pubId, Model model) {
-//		for (Publication paper : Database.getPublications()) {
-//			if (paper.getPubId().equalsIgnoreCase(pubId)) {
-//				model.addAttribute("publication", paper);
-//				dao.save(paper);
-//				return "PublicationPage";
-//			}
-//		}
-//		return "PublicationPage";
-//	}
+	@RequestMapping("/{pubId}")
+	public String getPublication(@PathVariable("pubId") long pubId, Model model) {
+		PublicationDAO pubDAO = ctx.getBean(PublicationDAO.class);
+		model.addAttribute("publication", pubDAO.getPublication(pubId));
+		return "PublicationPage";
+	}
 	
 }

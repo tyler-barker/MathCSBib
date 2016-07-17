@@ -30,6 +30,7 @@ public class MathCsBibApplication {
 		author.setLastName("Barker");
 		author.setMiddleInitial("C");
 		pub.setTitle("A Monad for Randomized Algorithms");
+		pub.setUrl("http://cs.tulane.edu/~tbarker/files/dissertation.pdf");
 		pub.getAuthors().add(author);
 		Publication pub2 = new Publication();
 		pub2.setTitle("Paper 2");

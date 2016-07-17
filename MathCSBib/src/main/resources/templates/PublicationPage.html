@@ -2,12 +2,28 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1"></meta>
-<title>Insert title here</title>
+<title>Publication</title>
+<link th:href="@{~/mainStyle.css}" rel="stylesheet" type="text/css" /> 
 </head>
-<body>
+<body th:inline="text">
+
+<div id="navigation">
+<table>
+<tr>
+<td><a th:href="@{~/index.html}">Home</a></td>
+<td><a th:href="@{~/publications}">Publications</a></td>
+<td><a th:href="@{~/authors}">Authors</a></td>
+</tr>
+</table>
+
+</div>
+
+<div id="main">
 	<h1>Publication</h1>
 
-	Title: <span th:text="${publication.title}"></span><br>
-	Authors: <span th:text="${publication.authors}"></span>
+	Title: <span th:text="${publication.title}"></span><br></br>
+	URL: <a th:href="@{{url}(url=${publication.url})}"><span th:text="${publication.url}"></span></a>
+	
+</div>
 </body>
 </html>

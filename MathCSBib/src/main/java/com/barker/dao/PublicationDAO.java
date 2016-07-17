@@ -23,6 +23,11 @@ public class PublicationDAO {
 	public void save(Publication pub) {
 		sf.getCurrentSession().saveOrUpdate(pub);
 	}
+
+	public Publication getPublication(long id) {
+		Publication pub = (Publication) sf.getCurrentSession().get(Publication.class, id);
+		return pub;
+	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Publication> getPublications() {

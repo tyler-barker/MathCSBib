@@ -6,8 +6,6 @@
 <link th:href="@{~/mainStyle.css}" rel="stylesheet" type="text/css" />  
 </head>
 <body th:inline="text">
-</head>
-<body>
 
 <div id="navigation">
 <table>
@@ -21,11 +19,11 @@
 </div>
 
 <div id="main">
+	<h1>Publication Added!</h1>
 
-
-	<h1>Author Added!</h1>
-
-	<span th:text="${newAuthor.firstName}"></span> <span th:text="${newAuthor.lastName}"></span> has been added.
+	<span th:text="${newPublication.title}"></span> has been added. <br></br>
+	
+	<a th:href="@{/publications/{id}(id=${newPublication.pubId})}">Go to publication.</a>
 	
 </div>
 </body>
