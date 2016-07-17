@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"></meta>
+<title>New Publication Form</title>
+</head>
+<body>
+	<h1>MathCSBib</h1>
+	
+	<h3>Add A New Publication</h3>
+
+	<form action="#" th:action="@{/publications/newPublication}" method="post" th:object="${newPublication}">
+	
+	<label for="title">Title:</label>
+	<input type="text" th:field="*{title}"/>
+		
+	<input type="submit" />
+	
+	</form>
+</body>
+</html>
