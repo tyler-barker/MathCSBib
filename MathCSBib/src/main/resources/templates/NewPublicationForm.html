@@ -23,11 +23,19 @@
 	
 	<h3>Add A New Publication</h3>
 
-	<form action="#" th:action="@{/publications/newPublication}" method="post" th:object="${newPublication}">
+	<form action="#" th:object="${newPublication}" th:action="@{/publications/newPublication}" method="post">
 	<p>
 	<label for="title">Title:</label>
 	<input id="title" type="text" th:field="*{title}"/>
 	</p>
+	
+	<label for="authors">Authors:</label>
+	<select th:field="*{authors}" multiple="multiple">
+		<option th:each="author : ${authorList}"
+				th:value="${{author}}">
+				[[${author.firstName}]] [[${author.lastName}]]</option>
+	</select>
+	
 	<p>
 	<label for="url">URL:</label>
 	<input id="url" type="text" th:field="*{url}"/>

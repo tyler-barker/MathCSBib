@@ -39,5 +39,14 @@ public class PublicationDAO {
 		Publication publication = (Publication) sf.getCurrentSession().get(Publication.class, id);
 		return publication.getAuthors();
 	}
+	
+	public void addAuthor(long pubId, long authorId) {
+		Publication pub = (Publication) sf.getCurrentSession().get(Publication.class, pubId);
+		Author author = (Author) sf.getCurrentSession().get(Author.class, authorId);
+		pub.getAuthors().add(author);
+		author.getPublications().add(pub);
+		sf.getCurrentSession().update(pub);
+		sf.getCurrentSession().update(author);
+	}
 
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.barker.dao.AuthorDAO;
 import com.barker.dao.PublicationDAO;
 import com.barker.model.Author;
 import com.barker.model.Publication;
@@ -25,14 +26,24 @@ public class PublicationController {
 	@RequestMapping(value="/newPublication", method=RequestMethod.GET)
 	public String getNewPublicationForm(Model model) {
 		model.addAttribute("newPublication", new Publication());
+		AuthorDAO authorDAO = ctx.getBean(AuthorDAO.class);
+		model.addAttribute("authorList", authorDAO.getAuthors());
+		//model.addAttribute("addedAuthors", new ArrayList<Long>());
+		//model.addAttribute("firstAuthorId", 0);
 		return "NewPublicationForm";
 	}
 	
 	@RequestMapping(value="/newPublication", method=RequestMethod.POST)
-	public String addAuthor(@ModelAttribute("newPublication") Publication newPublication, Model model) {
+	public String addAuthor(@ModelAttribute("newPublication") Publication newPublication, 
+							Model model) {
 		model.addAttribute("newPublication", newPublication);
 		PublicationDAO pubDAO = ctx.getBean(PublicationDAO.class);
+		//AuthorDAO authorDAO = ctx.getBean(AuthorDAO.class);
+		//newPublication.getAuthors().add(authorDAO.getAuthor(firstAuthorId));
 		pubDAO.save(newPublication);
+		for (Author author: newPublication.getAuthors()) {
+			pubDAO.addAuthor(newPublication.getPubId(), author.getAuthorId());
+		}
 		return "PublicationAdded";
 	}
 	

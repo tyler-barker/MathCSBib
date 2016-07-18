@@ -21,7 +21,7 @@ public class MathCsBibApplication {
 	public static void main(String[] args) {
 		ApplicationContext ctx = SpringApplication.run(MathCsBibApplication.class, args);
 		
-		PublicationDAO pubDAO = ctx.getBean(PublicationDAO.class);
+/*		PublicationDAO pubDAO = ctx.getBean(PublicationDAO.class);
 		AuthorDAO authorDAO = ctx.getBean(AuthorDAO.class);
 		
 		Publication pub = new Publication();
@@ -37,25 +37,17 @@ public class MathCsBibApplication {
 		author2.setFirstName("Michael");
 		author2.setLastName("Mislove");
 		author2.setUniversity("Tulane");
-		//author2.setPicture("http://www.cs.tulane.edu/~mwm/Michael_Misloves_Home_Page/Michael_Mislove_files/droppedImage.jpg");
+		author2.setPicture("http://www.cs.tulane.edu/~mwm/Michael_Misloves_Home_Page/Michael_Mislove_files/droppedImage.jpg");
 		authorDAO.save(author2);
 		
 		pub.setTitle("A Monad for Randomized Algorithms");
 		pub.setUrl("http://cs.tulane.edu/~tbarker/files/dissertation.pdf");
 		pub.getAuthors().add(author);
-		Publication pub2 = new Publication();
-		pub2.setTitle("Paper 2");
-		pub2.getAuthors().add(author);
-		pub2.getAuthors().add(author2);
 		author.getPublications().add(pub);
-		author.getPublications().add(pub2);
-		author2.getPublications().add(pub2);
-		
 		
 		pubDAO.save(pub);
-		pubDAO.save(pub2);
 		authorDAO.save(author);
-		authorDAO.save(author2);
+		authorDAO.save(author2);*/
 		
 	}
 	
@@ -63,4 +55,5 @@ public class MathCsBibApplication {
     public HibernateJpaSessionFactoryBean sessionFactory() {
         return new HibernateJpaSessionFactoryBean();
     }
+	
 }
