@@ -41,6 +41,10 @@ public class AuthorDAO {
 		return author.getPublications();
 	}
 	
+	public void update(Author author) {
+		sf.getCurrentSession().update(author);
+	}
+	
 	public void delete(long authorId) {
 		Session session = sf.getCurrentSession();
 		Author author = (Author) session.get(Author.class, authorId);

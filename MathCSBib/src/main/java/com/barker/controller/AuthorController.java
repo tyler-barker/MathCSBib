@@ -49,6 +49,23 @@ public class AuthorController {
 		return "AuthorPage";
 	}
 	
+	@RequestMapping(value="/{authorId}/update", method=RequestMethod.GET)
+	public String updatePublication(@PathVariable("authorId") long authorId, Model model) {
+		AuthorDAO authorDAO = ctx.getBean(AuthorDAO.class);
+		Author author = authorDAO.getAuthor(authorId);
+		model.addAttribute("author", author);
+		return "AuthorUpdatePage";
+	}
+	
+	@RequestMapping(value="/{authorId}/update", method=RequestMethod.POST)
+	public String updateComplete(@ModelAttribute("author") Author author, Model model) {
+		AuthorDAO authorDAO = ctx.getBean(AuthorDAO.class);
+		authorDAO.update(author);
+		return "redirect:/authors/"+ Long.toString(author.getAuthorId());
+	}
+	
+	
+	
 	@RequestMapping(value="/{authorId}/delete", method=RequestMethod.POST)
 	public String deletePublication(@PathVariable("authorId") long authorId, Model model) {
 		AuthorDAO authorDAO = ctx.getBean(AuthorDAO.class);

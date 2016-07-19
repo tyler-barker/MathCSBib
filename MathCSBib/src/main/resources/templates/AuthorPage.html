@@ -62,6 +62,9 @@
     </div>
 	
 </div>
+<form th:action="@{/authors/{id}/update(id=${author.authorId})}" method="get">
+    <button type="submit">Update Author</button>
+</form>
 <form th:action="@{/authors/{id}/delete(id=${author.authorId})}" method="post">
     <button type="submit">Delete Author</button>
 </form>
