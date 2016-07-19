@@ -38,8 +38,6 @@ public class PublicationController {
 							Model model) {
 		model.addAttribute("newPublication", newPublication);
 		PublicationDAO pubDAO = ctx.getBean(PublicationDAO.class);
-		//AuthorDAO authorDAO = ctx.getBean(AuthorDAO.class);
-		//newPublication.getAuthors().add(authorDAO.getAuthor(firstAuthorId));
 		pubDAO.save(newPublication);
 		for (Author author: newPublication.getAuthors()) {
 			pubDAO.addAuthor(newPublication.getPubId(), author.getAuthorId());
@@ -54,7 +52,7 @@ public class PublicationController {
 		return "PublicationsPage";
 	}
 	
-	@RequestMapping("/{pubId}")
+	@RequestMapping(value="/{pubId}", method=RequestMethod.GET)
 	public String getPublication(@PathVariable("pubId") long pubId, Model model) {
 		PublicationDAO pubDAO = ctx.getBean(PublicationDAO.class);
 		Publication pub = pubDAO.getPublication(pubId);
@@ -66,6 +64,13 @@ public class PublicationController {
 		else
 			model.addAttribute("authorText", "Author");
 		return "PublicationPage";
+	}
+	
+	@RequestMapping(value="/{pubId}/delete", method=RequestMethod.POST)
+	public String deletePublication(@PathVariable("pubId") long pubId, Model model) {
+		PublicationDAO pubDAO = ctx.getBean(PublicationDAO.class);
+		pubDAO.delete(pubId);
+		return "DeletedPublicationPage";
 	}
 	
 }

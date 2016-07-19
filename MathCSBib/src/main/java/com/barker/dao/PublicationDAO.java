@@ -2,6 +2,7 @@ package com.barker.dao;
 
 import java.util.List;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -47,6 +48,18 @@ public class PublicationDAO {
 		author.getPublications().add(pub);
 		sf.getCurrentSession().update(pub);
 		sf.getCurrentSession().update(author);
+	}
+	
+	public void delete(long pubId) {
+		Session session = sf.getCurrentSession();
+		Publication pub = (Publication) session.get(Publication.class, pubId);
+		for (Author author : pub.getAuthors()) {
+			author.getPublications().remove(pub);
+			session.update(author);
+		}
+		pub.setAuthors(null);
+		session.update(pub);
+		session.delete(pub);
 	}
 
 }

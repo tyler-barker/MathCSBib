@@ -26,5 +26,10 @@
 	URL: <a th:href="@{{url}(url=${publication.url})}"><span th:text="${publication.url}"></span></a>
 	
 </div>
+
+<form th:action="@{/publications/{id}/delete(id=${publication.pubId})}" method="post">
+    <button type="submit">Delete Publication</button>
+</form>
+
 </body>
 </html>

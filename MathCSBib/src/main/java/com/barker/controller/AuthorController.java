@@ -48,5 +48,12 @@ public class AuthorController {
 		model.addAttribute("publications", authorDAO.getPublicationsFromAuthor(authorId));
 		return "AuthorPage";
 	}
+	
+	@RequestMapping(value="/{authorId}/delete", method=RequestMethod.POST)
+	public String deletePublication(@PathVariable("authorId") long authorId, Model model) {
+		AuthorDAO authorDAO = ctx.getBean(AuthorDAO.class);
+		authorDAO.delete(authorId);
+		return "DeletedAuthorPage";
+	}
 
 }
