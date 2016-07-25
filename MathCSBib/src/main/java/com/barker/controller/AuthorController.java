@@ -50,7 +50,7 @@ public class AuthorController {
 	}
 	
 	@RequestMapping(value="/{authorId}/update", method=RequestMethod.GET)
-	public String updatePublication(@PathVariable("authorId") long authorId, Model model) {
+	public String updateAuthor(@PathVariable("authorId") long authorId, Model model) {
 		AuthorDAO authorDAO = ctx.getBean(AuthorDAO.class);
 		Author author = authorDAO.getAuthor(authorId);
 		model.addAttribute("author", author);
@@ -67,7 +67,7 @@ public class AuthorController {
 	
 	
 	@RequestMapping(value="/{authorId}/delete", method=RequestMethod.POST)
-	public String deletePublication(@PathVariable("authorId") long authorId, Model model) {
+	public String deleteAuthor(@PathVariable("authorId") long authorId, Model model) {
 		AuthorDAO authorDAO = ctx.getBean(AuthorDAO.class);
 		authorDAO.delete(authorId);
 		return "DeletedAuthorPage";

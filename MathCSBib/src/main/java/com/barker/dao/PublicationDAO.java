@@ -50,6 +50,10 @@ public class PublicationDAO {
 		sf.getCurrentSession().update(author);
 	}
 	
+	public void update(Publication pub) {
+		sf.getCurrentSession().update(pub);
+	}
+	
 	public void delete(long pubId) {
 		Session session = sf.getCurrentSession();
 		Publication pub = (Publication) session.get(Publication.class, pubId);

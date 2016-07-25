@@ -55,4 +55,8 @@ public class Publication {
 		this.url = url;
 	}
 	
+	public boolean hasAuthor(Author author) {
+		return authors.contains(author);
+	}
+	
 }

@@ -27,6 +27,9 @@
 	
 </div>
 
+<form th:action="@{/publications/{id}/update(id=${publication.pubId})}" method="get">
+    <button type="submit">Update Publication</button>
+</form>
 <form th:action="@{/publications/{id}/delete(id=${publication.pubId})}" method="post">
     <button type="submit">Delete Publication</button>
 </form>

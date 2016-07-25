@@ -1,5 +1,6 @@
 package com.barker.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +65,24 @@ public class PublicationController {
 		else
 			model.addAttribute("authorText", "Author");
 		return "PublicationPage";
+	}
+	
+	@RequestMapping(value="/{pubId}/update", method=RequestMethod.GET)
+	public String updatePublication(@PathVariable("pubId") long pubId, Model model) {
+		PublicationDAO pubDAO = ctx.getBean(PublicationDAO.class);
+		AuthorDAO authorDAO = ctx.getBean(AuthorDAO.class);
+		model.addAttribute("authorList", authorDAO.getAuthors());
+		Publication publication = pubDAO.getPublication(pubId);
+		model.addAttribute("publication", publication);
+		return "PublicationUpdatePage";
+	}
+	
+	@RequestMapping(value="/{pubId}/update", method=RequestMethod.POST)
+	public String updateComplete(@ModelAttribute("publication") Publication pub,
+								 Model model) {
+		PublicationDAO pubDAO = ctx.getBean(PublicationDAO.class);
+		pubDAO.update(pub);
+		return "redirect:/publications/"+ Long.toString(pub.getPubId());
 	}
 	
 	@RequestMapping(value="/{pubId}/delete", method=RequestMethod.POST)
