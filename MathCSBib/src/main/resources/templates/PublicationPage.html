@@ -23,8 +23,15 @@
 
 	Title: <span th:text="${publication.title}"></span><br></br>
 	[[${authorText}]]: <span th:each="author : ${authors}"><a th:href="@{/authors/{id}(id=${author.authorId})}">[[${author.firstName}]] [[${author.lastName}]]</a></span><br></br>
-	URL: <a th:href="@{{url}(url=${publication.url})}"><span th:text="${publication.url}"></span></a>
-	
+	URL: <a th:href="@{{url}(url=${publication.url})}"><span th:text="${publication.url}"></span></a><br></br>
+	Topics: <span th:each="topic : ${publication.topics}">[[${topic.name}]]</span>
+	<form th:object = "${topic}" th:action="@{/publications/{id}/topics(id=${publication.pubId})}" method="post">
+	<p>
+	<label for="topic">Add Topic:</label>
+	<input id="topic" type="text" th:field="*{name}"/>
+	</p>
+    <input type="submit" />
+</form>
 </div>
 
 <form th:action="@{/publications/{id}/update(id=${publication.pubId})}" method="get">

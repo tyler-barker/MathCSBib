@@ -1,9 +1,8 @@
 package com.barker.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,9 +16,9 @@ public class Publication {
 	@Id @GeneratedValue
 	private long pubId;
 	@ManyToMany(mappedBy="publications", fetch = FetchType.EAGER)
-	private List<Author> authors = new ArrayList<Author>();
-	@ElementCollection
-	private List<String> topics = new ArrayList<String>();
+	private Set<Author> authors = new HashSet<Author>();
+	@ManyToMany(fetch = FetchType.EAGER)
+	private Set<Topic> topics = new HashSet<Topic>();
 	private String url;
 	
 	
@@ -36,16 +35,16 @@ public class Publication {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public List<Author> getAuthors() {
+	public Set<Author> getAuthors() {
 		return authors;
 	}
-	public void setAuthors(List<Author> authors) {
+	public void setAuthors(Set<Author> authors) {
 		this.authors = authors;
 	}
-	public List<String> getTopics() {
+	public Set<Topic> getTopics() {
 		return topics;
 	}
-	public void setTopics(List<String> topics) {
+	public void setTopics(Set<Topic> topics) {
 		this.topics = topics;
 	}
 	public String getUrl() {

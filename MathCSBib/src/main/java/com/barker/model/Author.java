@@ -1,7 +1,7 @@
 package com.barker.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,7 +18,7 @@ public class Author {
 	@Id @GeneratedValue
 	private long authorId;
 	@ManyToMany(fetch = FetchType.EAGER)
-	private List<Publication> publications = new ArrayList<Publication>();
+	private Set<Publication> publications = new HashSet<Publication>();
 	private String picture;
 	private String university;
 	
@@ -47,10 +47,10 @@ public class Author {
 	public void setMiddleInitial(String middleInitial) {
 		this.middleInitial = middleInitial;
 	}
-	public List<Publication> getPublications() {
+	public Set<Publication> getPublications() {
 		return publications;
 	}
-	public void setPublications(List<Publication> publications) {
+	public void setPublications(Set<Publication> publications) {
 		this.publications = publications;
 	}
 	public String getPicture() {

@@ -1,6 +1,7 @@
 package com.barker.dao;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.barker.model.Author;
 import com.barker.model.Publication;
+import com.barker.model.Topic;
 
 @Repository
 @Transactional
@@ -32,11 +34,11 @@ public class PublicationDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Publication> getPublications() {
-		return sf.getCurrentSession().createQuery("from Publication").list();
+	public Set<Publication> getPublications() {
+		return new HashSet<Publication>(sf.getCurrentSession().createQuery("from Publication").list());
 	}
 	
-	public List<Author> getAuthorsFromPublication(long id) {
+	public Set<Author> getAuthorsFromPublication(long id) {
 		Publication publication = (Publication) sf.getCurrentSession().get(Publication.class, id);
 		return publication.getAuthors();
 	}
@@ -64,6 +66,30 @@ public class PublicationDAO {
 		pub.setAuthors(null);
 		session.update(pub);
 		session.delete(pub);
+	}
+	
+	public void addTopic(long pubId, Topic topic) {
+		Session session = sf.getCurrentSession();
+		Publication pub = (Publication) session.get(Publication.class, pubId);
+		pub.getTopics().add(topic);
+		session.update(pub);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Set<Topic> getTopics() {
+		return new HashSet<Topic>(sf.getCurrentSession().createQuery("from Topic").list());
+	}
+	
+	public Topic findTopicByName(String name) {
+		for (Topic topic : getTopics()) {
+			if (topic.getName().equalsIgnoreCase(name))
+				return topic;
+		}
+		return null;
+	}
+	
+	public void saveTopic(Topic topic) {
+		sf.getCurrentSession().saveOrUpdate(topic);
 	}
 
 }

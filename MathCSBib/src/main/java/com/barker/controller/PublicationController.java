@@ -1,7 +1,6 @@
 package com.barker.controller;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -16,6 +15,7 @@ import com.barker.dao.AuthorDAO;
 import com.barker.dao.PublicationDAO;
 import com.barker.model.Author;
 import com.barker.model.Publication;
+import com.barker.model.Topic;
 
 @Controller
 @RequestMapping("/publications")
@@ -58,12 +58,13 @@ public class PublicationController {
 		PublicationDAO pubDAO = ctx.getBean(PublicationDAO.class);
 		Publication pub = pubDAO.getPublication(pubId);
 		model.addAttribute("publication", pub);
-		List<Author> authors = pubDAO.getAuthorsFromPublication(pubId);
+		Set<Author> authors = pubDAO.getAuthorsFromPublication(pubId);
 		model.addAttribute("authors", authors);
 		if (authors.size() > 1)
 			model.addAttribute("authorText", "Authors");
 		else
 			model.addAttribute("authorText", "Author");
+		model.addAttribute("topic", new Topic());
 		return "PublicationPage";
 	}
 	
@@ -90,6 +91,21 @@ public class PublicationController {
 		PublicationDAO pubDAO = ctx.getBean(PublicationDAO.class);
 		pubDAO.delete(pubId);
 		return "DeletedPublicationPage";
+	}
+	
+	@RequestMapping(value="/{pubId}/topics", method=RequestMethod.POST)
+	public String addTopic(@PathVariable("pubId") long pubId, 
+						   @ModelAttribute("topic") Topic newTopic,
+						   Model model) {
+		PublicationDAO pubDAO = ctx.getBean(PublicationDAO.class);
+		Topic topic = pubDAO.findTopicByName(newTopic.getName());
+		if (topic != null)
+			pubDAO.addTopic(pubId, topic);
+		else {
+			pubDAO.saveTopic(newTopic);
+			pubDAO.addTopic(pubId, newTopic);
+		}
+		return "redirect:/publications/"+ Long.toString(pubId);
 	}
 	
 }

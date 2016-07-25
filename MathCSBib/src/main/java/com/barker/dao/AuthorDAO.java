@@ -1,6 +1,7 @@
 package com.barker.dao;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -32,11 +33,11 @@ public class AuthorDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Author> getAuthors() {
-		return sf.getCurrentSession().createQuery("from Author").list();
+	public Set<Author> getAuthors() {
+		return new HashSet<Author>(sf.getCurrentSession().createQuery("from Author").list());
 	}
 	
-	public List<Publication> getPublicationsFromAuthor(long id) {
+	public Set<Publication> getPublicationsFromAuthor(long id) {
 		Author author = (Author) sf.getCurrentSession().get(Author.class, id);
 		return author.getPublications();
 	}
