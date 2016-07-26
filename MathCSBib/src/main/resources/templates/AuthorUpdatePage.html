@@ -25,6 +25,7 @@
 
 	<form action="#" th:object = "${author}" th:action="@{/authors/{id}/update(id=${author.authorId})}" method="post">
 	<input type="hidden" th:value="*{authorId}" th:field="*{authorId}" />
+	<input type="hidden" th:value="*{publications}" th:field="*{publications}" />
 	<p>
 	<label for="firstName">First Name:</label>
 	<input id="firstName" type="text" th:value="*{firstName}" th:field="*{firstName}"/>

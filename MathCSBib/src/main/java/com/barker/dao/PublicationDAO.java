@@ -52,8 +52,27 @@ public class PublicationDAO {
 		sf.getCurrentSession().update(author);
 	}
 	
-	public void update(Publication pub) {
-		sf.getCurrentSession().update(pub);
+	public void update(long pubId, Publication updatedPub) {
+		Session session = sf.getCurrentSession();
+		Publication pub = (Publication) session.get(Publication.class, pubId);
+		pub.setTitle(updatedPub.getTitle());
+		pub.setUrl(updatedPub.getUrl());
+		for (Author author : pub.getAuthors()) {
+			if (!updatedPub.getAuthors().contains(author)) {
+				author.getPublications().remove(pub);
+				pub.getAuthors().remove(author);
+				session.update(author);
+			}
+		}
+		for (Author author : updatedPub.getAuthors()) {
+			Author aut = (Author) session.get(Author.class, author.getAuthorId());
+			if (!pub.getAuthors().contains(aut)) {
+				aut.getPublications().add(pub);
+				pub.getAuthors().add(aut);
+				session.update(aut);
+			}
+		}
+		session.update(pub);
 	}
 	
 	public void delete(long pubId) {

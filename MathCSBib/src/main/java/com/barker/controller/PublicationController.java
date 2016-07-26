@@ -78,11 +78,11 @@ public class PublicationController {
 		return "PublicationUpdatePage";
 	}
 	
-	@RequestMapping(value="/{pubId}/update", method=RequestMethod.POST)
+	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public String updateComplete(@ModelAttribute("publication") Publication pub,
 								 Model model) {
 		PublicationDAO pubDAO = ctx.getBean(PublicationDAO.class);
-		pubDAO.update(pub);
+		pubDAO.update(pub.getPubId(), pub);
 		return "redirect:/publications/"+ Long.toString(pub.getPubId());
 	}
 	

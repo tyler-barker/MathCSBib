@@ -23,7 +23,7 @@
 	
 	<h3>Update Publication</h3>
 
-	<form action="#" th:object="${publication}" th:action="@{/publications/{id}/update(id=${publication.pubId})}" method="post">
+	<form action="#" th:object="${publication}" th:action="@{/publications/update}" method="post">
 	<input type="hidden" th:value="*{pubId}" th:field="*{pubId}" />
 	<p>
 	<label for="title">Title:</label>
@@ -31,7 +31,7 @@
 	</p>
 	
 	<label for="authors">Authors:</label>
-	<select id="authors" th:field="*{authors}" multiple="multiple">
+	<select id="authors" th:field="*{authors}" multiple="multiple" size="6">
 		<option th:each="author : ${authorList}"
 				th:value="${{author}}">
 				[[${author.firstName}]] [[${author.lastName}]]</option>

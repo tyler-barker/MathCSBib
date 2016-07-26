@@ -30,7 +30,7 @@
 	</p>
 	
 	<label for="authors">Authors:</label>
-	<select th:field="*{authors}" multiple="multiple">
+	<select th:field="*{authors}" multiple="multiple" size="6">
 		<option th:each="author : ${authorList}"
 				th:value="${{author}}">
 				[[${author.firstName}]] [[${author.lastName}]]</option>
