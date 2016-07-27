@@ -1,22 +1,17 @@
 package com.barker;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-import com.barker.dao.AuthorDAO;
-import com.barker.dao.PublicationDAO;
-import com.barker.model.Author;
-import com.barker.model.Publication;
-
-@Configuration
-@EnableAutoConfiguration
-@ComponentScan("com.barker")
-public class MathCsBibApplication {
+@SpringBootApplication
+@EnableOAuth2Sso
+public class MathCsBibApplication extends WebSecurityConfigurerAdapter {
 
 	public static void main(String[] args) {
 		ApplicationContext ctx = SpringApplication.run(MathCsBibApplication.class, args);
@@ -55,5 +50,17 @@ public class MathCsBibApplication {
     public HibernateJpaSessionFactoryBean sessionFactory() {
         return new HibernateJpaSessionFactoryBean();
     }
+	
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http
+			.antMatcher("/**")
+			.authorizeRequests()
+				.antMatchers("/", "/authors**", "/publications**", "/topics**", "/login**", "/webjars/**")
+				.permitAll()
+			.anyRequest()
+				.authenticated();
+	}
+
 	
 }
