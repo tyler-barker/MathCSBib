@@ -1,15 +1,45 @@
 package com.barker.controller;
 
-import java.security.Principal;
+import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.barker.dao.UserRepository;
+import com.barker.model.User;
+import com.barker.service.UserService;
 
 @Controller
-@RequestMapping("/user")
 public class UserController {
 	
-	public Principal user(Principal principal) {
-		return principal;
+	@Autowired
+	private UserRepository userRepo;
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+    protected AuthenticationManager authenticationManager;
+	
+	@RequestMapping(value="/register", method=RequestMethod.GET)
+	public String register(User user) {
+		return "register";
+	}
+	
+	@RequestMapping(value="/register", method=RequestMethod.POST)
+	public String registerPost(@Valid User user, BindingResult result) {
+		if (result.hasErrors())
+			return "register";
+		User registeredUser = userService.register(user);
+		if (registeredUser != null)
+			return "registerSuccess";
+		else {
+			result.rejectValue("username", "error.alreadyExists", "This username already exists.");
+			return "register";
+		}
 	}
 }

@@ -6,10 +6,16 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.barker.service.UserService;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+	
+	@Autowired
+    private UserService userService;
 	
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -20,6 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 			 "/publications/*", 
                 			 "/authors",
                 			 "/authors/*",
+                			 "/register",
                 			 "/mainStyle.css")
                 .permitAll()
                 .anyRequest().authenticated()
@@ -35,8 +42,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
-            .inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER");
+        	.userDetailsService(userService)
+        	.passwordEncoder(new BCryptPasswordEncoder());
     }
 
 }

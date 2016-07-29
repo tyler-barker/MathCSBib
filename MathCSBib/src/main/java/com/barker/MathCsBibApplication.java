@@ -6,11 +6,21 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
 
+import com.barker.model.User;
+import com.barker.service.UserService;
+
 @SpringBootApplication
 public class MathCsBibApplication {
 
 	public static void main(String[] args) {
 		ApplicationContext ctx = SpringApplication.run(MathCsBibApplication.class, args);
+		
+//		UserService userService = ctx.getBean(UserService.class);
+//		
+//		User user = new User();
+//		user.setUserName("tbarker");
+//		user.setPassword("lildude1");
+//		userService.register(user);
 		
 /*		PublicationDAO pubDAO = ctx.getBean(PublicationDAO.class);
 		AuthorDAO authorDAO = ctx.getBean(AuthorDAO.class);
