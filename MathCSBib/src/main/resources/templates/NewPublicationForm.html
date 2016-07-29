@@ -3,48 +3,48 @@
 <head>
 <meta charset="ISO-8859-1"></meta>
 <title>New Publication Form</title>
-<link th:href="@{~/mainStyle.css}" rel="stylesheet" type="text/css" /> 
+<link th:href="@{~/mainStyle.css}" rel="stylesheet" type="text/css" />
 </head>
 <body th:inline="text">
 
-<div id="navigation">
-<table>
-<tr>
-<td><a th:href="@{~/}">Home</a></td>
-<td><a th:href="@{~/publications}">Publications</a></td>
-<td><a th:href="@{~/authors}">Authors</a></td>
-</tr>
-</table>
+	<div id="navigation">
+		<table>
+			<tr>
+				<td><a th:href="@{~/}">Home</a></td>
+				<td><a th:href="@{~/publications}">Publications</a></td>
+				<td><a th:href="@{~/authors}">Authors</a></td>
+			</tr>
+		</table>
 
-</div>
+	</div>
 
-<div id="main">
-	<h1>MathCSBib</h1>
-	
-	<h3>Add A New Publication</h3>
+	<div id="main">
+		<h1>MathCSBib</h1>
 
-	<form action="#" th:object="${newPublication}" th:action="@{/publications/newPublication}" method="post">
-	<p>
-	<label for="title">Title:</label>
-	<input id="title" type="text" th:field="*{title}"/>
-	</p>
-	
-	<label for="authors">Authors:</label>
-	<select th:field="*{authors}" multiple="multiple" size="6">
-		<option th:each="author : ${authorList}"
-				th:value="${{author}}">
-				[[${author.firstName}]] [[${author.lastName}]]</option>
-	</select>
-	
-	<p>
-	<label for="url">URL:</label>
-	<input id="url" type="text" th:field="*{url}"/>
-	</p>
-	<p>
-	<input type="submit" />
-	</p>
-	</form>
-	
-</div>
+		<h3>Add A New Publication</h3>
+
+		<form action="#" th:object="${newPublication}"
+			th:action="@{/publications/newPublication}" method="post">
+			<p>
+				<label for="title">Title:</label> <input id="title" type="text"
+					th:field="*{title}" />
+			</p>
+
+			<label for="authors">Authors:</label> <select th:field="*{authors}"
+				multiple="multiple" size="6">
+				<option th:each="author : ${authorList}" th:value="${{author}}">
+					[[${author.firstName}]] [[${author.lastName}]]</option>
+			</select>
+
+			<p>
+				<label for="url">URL:</label> <input id="url" type="text"
+					th:field="*{url}" />
+			</p>
+			<p>
+				<input type="submit" value="Submit" />
+			</p>
+		</form>
+
+	</div>
 </body>
 </html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>MathCSBib</title>
+<link th:href="@{~/mainStyle.css}" rel="stylesheet" type="text/css" />
+</head>
+<body th:inline="text">
+
+	<div id="navigation">
+		<table>
+			<tr>
+				<td><a th:href="@{~/}">Home</a></td>
+				<td><a th:href="@{~/publications}">Publications</a></td>
+				<td><a th:href="@{~/authors}">Authors</a></td>
+			</tr>
+		</table>
+
+	</div>
+	
+	<div id="main">
+	
+	<div th:if="${param.error}">Invalid username and password.</div>
+	<div th:if="${param.logout}">You have been logged out.</div>
+	<form th:action="@{/login}" method="post">
+		<div>
+			<label> User Name : <input type="text" name="username" />
+			</label>
+		</div>
+		<div>
+			<label> Password: <input type="password" name="password" />
+			</label>
+		</div>
+		<div>
+			<input type="submit" value="Sign In" />
+		</div>
+	</form>
+	
+	</div>
+</body>
+</html>

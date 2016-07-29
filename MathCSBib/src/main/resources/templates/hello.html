@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-<meta charset="ISO-8859-1"></meta>
 <title>MathCSBib</title>
 <link th:href="@{~/mainStyle.css}" rel="stylesheet" type="text/css" />
 </head>
@@ -19,7 +20,11 @@
 	</div>
 
 	<div id="main">
-		<h1>Author Deleted!</h1>
+
+		<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" />
+		</form>
 
 	</div>
 </body>

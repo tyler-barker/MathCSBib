@@ -2,16 +2,12 @@ package com.barker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @SpringBootApplication
-@EnableOAuth2Sso
-public class MathCsBibApplication extends WebSecurityConfigurerAdapter {
+public class MathCsBibApplication {
 
 	public static void main(String[] args) {
 		ApplicationContext ctx = SpringApplication.run(MathCsBibApplication.class, args);
@@ -50,17 +46,6 @@ public class MathCsBibApplication extends WebSecurityConfigurerAdapter {
     public HibernateJpaSessionFactoryBean sessionFactory() {
         return new HibernateJpaSessionFactoryBean();
     }
-	
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http
-			.antMatcher("/**")
-			.authorizeRequests()
-				.antMatchers("/", "/authors**", "/publications**", "/topics**", "/login**", "/webjars/**")
-				.permitAll()
-			.anyRequest()
-				.authenticated();
-	}
 
 	
 }

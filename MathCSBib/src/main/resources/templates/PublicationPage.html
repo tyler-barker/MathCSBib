@@ -3,43 +3,50 @@
 <head>
 <meta charset="ISO-8859-1"></meta>
 <title>Publication</title>
-<link th:href="@{~/mainStyle.css}" rel="stylesheet" type="text/css" /> 
+<link th:href="@{~/mainStyle.css}" rel="stylesheet" type="text/css" />
 </head>
 <body th:inline="text">
 
-<div id="navigation">
-<table>
-<tr>
-<td><a th:href="@{~/}">Home</a></td>
-<td><a th:href="@{~/publications}">Publications</a></td>
-<td><a th:href="@{~/authors}">Authors</a></td>
-</tr>
-</table>
+	<div id="navigation">
+		<table>
+			<tr>
+				<td><a th:href="@{~/}">Home</a></td>
+				<td><a th:href="@{~/publications}">Publications</a></td>
+				<td><a th:href="@{~/authors}">Authors</a></td>
+			</tr>
+		</table>
 
-</div>
+	</div>
 
-<div id="main">
-	<h1>Publication</h1>
+	<div id="main">
+		<h1>Publication</h1>
 
-	Title: <span th:text="${publication.title}"></span><br></br>
-	[[${authorText}]]: <span th:each="author : ${authors}"><a th:href="@{/authors/{id}(id=${author.authorId})}">[[${author.firstName}]] [[${author.lastName}]]</a></span><br></br>
-	URL: <a th:href="@{{url}(url=${publication.url})}"><span th:text="${publication.url}"></span></a><br></br>
-	Topics: <span th:each="topic : ${publication.topics}">[[${topic.name}]]</span>
-	<form th:object = "${topic}" th:action="@{/publications/{id}/topics(id=${publication.pubId})}" method="post">
-	<p>
-	<label for="topic">Add Topic:</label>
-	<input id="topic" type="text" th:field="*{name}"/>
-	</p>
-    <input type="submit" />
-</form>
-</div>
+		Title: <span th:text="${publication.title}"></span><br></br>
+		[[${authorText}]]: <span th:each="author : ${authors}"><a
+			th:href="@{/authors/{id}(id=${author.authorId})}">[[${author.firstName}]]
+				[[${author.lastName}]]</a></span><br></br> URL: <a
+			th:href="@{{url}(url=${publication.url})}"><span
+			th:text="${publication.url}"></span></a><br></br> Topics: <span
+			th:each="topic : ${publication.topics}">[[${topic.name}]]</span>
+		<form th:object="${topic}"
+			th:action="@{/publications/{id}/topics(id=${publication.pubId})}"
+			method="post">
+			<p>
+				<label for="topic">Add Topic:</label> <input id="topic" type="text"
+					th:field="*{name}" />
+			</p>
+			<input type="submit" value="Submit" />
+		</form>
+	</div>
 
-<form th:action="@{/publications/{id}/update(id=${publication.pubId})}" method="get">
-    <button type="submit">Update Publication</button>
-</form>
-<form th:action="@{/publications/{id}/delete(id=${publication.pubId})}" method="post">
-    <button type="submit">Delete Publication</button>
-</form>
+	<form th:action="@{/publications/{id}/update(id=${publication.pubId})}"
+		method="get">
+		<button type="submit">Update Publication</button>
+	</form>
+	<form th:action="@{/publications/{id}/delete(id=${publication.pubId})}"
+		method="post">
+		<button type="submit">Delete Publication</button>
+	</form>
 
 </body>
 </html>

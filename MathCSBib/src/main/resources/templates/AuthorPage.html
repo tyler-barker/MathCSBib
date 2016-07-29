@@ -3,70 +3,84 @@
 <head>
 <meta charset="ISO-8859-1"></meta>
 <title>Publication</title>
-<link th:href="@{~/mainStyle.css}" rel="stylesheet" type="text/css" /> 
+<link th:href="@{~/mainStyle.css}" rel="stylesheet" type="text/css" />
 </head>
 <body th:inline="text">
 
-<div id="navigation">
-<table>
-<tr>
-<td><a th:href="@{~/}">Home</a></td>
-<td><a th:href="@{~/publications}">Publications</a></td>
-<td><a th:href="@{~/authors}">Authors</a></td>
-</tr>
-</table>
+	<div id="navigation">
+		<table>
+			<tr>
+				<td><a th:href="@{~/}">Home</a></td>
+				<td><a th:href="@{~/publications}">Publications</a></td>
+				<td><a th:href="@{~/authors}">Authors</a></td>
+			</tr>
+		</table>
 
-<div class="hr"> <hr /> </div>
+		<div class="hr">
+			<hr />
+		</div>
 
-</div>
+	</div>
 
-<div id="name">
-	[[${author.firstName}]] [[${author.lastName}]]
-</div>
+	<div id="name">[[${author.firstName}]] [[${author.lastName}]]</div>
 
-<div id="main">
-	
-	
-<table>
-   <tr>
-      <td>
-	
-		<img th:src="@{{url}(url=${author.picture})}" width="300" ></img>
-	
-      </td>
-      <td>	
+	<div id="main">
+
+
+		<table>
+			<tr>
+				<td><img th:src="@{{url}(url=${author.picture})}" width="300"></img>
+
+				</td>
+				<td>
+					<table>
+						<tr>
+							<td><bold>First Name:</bold> <span
+								th:text="${author.firstName}"></span></td>
+						</tr>
+						<tr>
+							<td><bold>Middle Initial:</bold> <span
+								th:text="${author.middleInitial}"></span></td>
+						</tr>
+						<tr>
+							<td><bold>Last Name:</bold> <span
+								th:text="${author.lastName}"></span></td>
+						</tr>
+						<tr>
+							<td><bold>University:</bold> <span
+								th:text="${author.university}"></span></td>
+						</tr>
+
+					</table>
+
+				</td>
+			</tr>
+		</table>
+
+		<div class="center">
+
+			<div class="hr">
+				<hr />
+			</div>
+
+			<h3>Publications</h3>
 			<table>
-			<tr><td><bold>First Name:</bold> <span th:text="${author.firstName}"></span></td></tr>	
-			<tr><td><bold>Middle Initial:</bold> <span th:text="${author.middleInitial}"></span></td></tr>
-			<tr><td><bold>Last Name:</bold> <span th:text="${author.lastName}"></span></td></tr>
-			<tr><td><bold>University:</bold> <span th:text="${author.university}"></span></td></tr>
-			
+				<tr th:each="pub : ${publications}">
+					<td><a th:href="@{/publications/{id}(id=${pub.pubId})}">[[${pub.title}]]</a></td>
+
+				</tr>
 			</table>
-	
-	  </td>
-   </tr>
-</table>
-	
-	<div class="center">
-	
-	<div class="hr"> <hr /> </div>
-	
-	<h3>Publications</h3>
-	<table>
-	<tr th:each="pub : ${publications}">
-        <td> <a th:href="@{/publications/{id}(id=${pub.pubId})}">[[${pub.title}]]</a></td>
-        
-    </tr>
-    </table>
-    
-    </div>
-	
-</div>
-<form th:action="@{/authors/{id}/update(id=${author.authorId})}" method="get">
-    <button type="submit">Update Author</button>
-</form>
-<form th:action="@{/authors/{id}/delete(id=${author.authorId})}" method="post">
-    <button type="submit">Delete Author</button>
-</form>
+
+		</div>
+
+	</div>
+	<form th:action="@{/authors/{id}/update(id=${author.authorId})}"
+		method="get">
+		<button type="submit">Update Author</button>
+	</form>
+	<form th:action="@{/authors/{id}/delete(id=${author.authorId})}"
+		method="post">
+		<button type="submit">Delete Author</button>
+	</form>
 </body>
 </html>

@@ -3,54 +3,58 @@
 <head>
 <meta charset="ISO-8859-1"></meta>
 <title>New Author Form</title>
-<link th:href="@{~/mainStyle.css}" rel="stylesheet" type="text/css" /> 
+<link th:href="@{~/mainStyle.css}" rel="stylesheet" type="text/css" />
 </head>
 <body th:inline="text">
 
-<div id="navigation">
-<table>
-<tr>
-<td><a th:href="@{~/}">Home</a></td>
-<td><a th:href="@{~/publications}">Publications</a></td>
-<td><a th:href="@{~/authors}">Authors</a></td>
-</tr>
-</table>
+	<div id="navigation">
+		<table>
+			<tr>
+				<td><a th:href="@{~/}">Home</a></td>
+				<td><a th:href="@{~/publications}">Publications</a></td>
+				<td><a th:href="@{~/authors}">Authors</a></td>
+			</tr>
+		</table>
 
-</div>
+	</div>
 
-<div id="main">
-	<h1>MathCSBib</h1>
-	
-	<h3>Update Author</h3>
+	<div id="main">
+		<h1>MathCSBib</h1>
 
-	<form action="#" th:object = "${author}" th:action="@{/authors/{id}/update(id=${author.authorId})}" method="post">
-	<input type="hidden" th:value="*{authorId}" th:field="*{authorId}" />
-	<input type="hidden" th:value="*{publications}" th:field="*{publications}" />
-	<p>
-	<label for="firstName">First Name:</label>
-	<input id="firstName" type="text" th:value="*{firstName}" th:field="*{firstName}"/>
-	</p>
-	<p>
-	<label for="middleInitial">Middle Initial:</label>
-	<input id="middleInitial" type="text" th:value="*{middleInitial}" th:field="*{middleInitial}"/>
-	</p>
-	<p>
-	<label for="lastName">Last Name:</label>
-	<input id="lastName" type="text" th:value="*{lastName}" th:field="*{lastName}"/>
-	</p>
-	<p>
-	<label for="university">University:</label>
-	<input id="university" type="text" th:value="*{university}" th:field="*{university}"/>
-	</p>
-	<p>
-	<label for="picture">Picture URL:</label>
-	<input id="picture" type="text" th:value="*{picture}" th:field="*{picture}"/>
-	</p>
-	<p>
-	<input type="submit" />
-	</p>
-	</form>
-	
-</div>
+		<h3>Update Author</h3>
+
+		<form action="#" th:object="${author}"
+			th:action="@{/authors/{id}/update(id=${author.authorId})}"
+			method="post">
+			<input type="hidden" th:value="*{authorId}" th:field="*{authorId}" />
+			<input type="hidden" th:value="*{publications}"
+				th:field="*{publications}" />
+			<p>
+				<label for="firstName">First Name:</label> <input id="firstName"
+					type="text" th:value="*{firstName}" th:field="*{firstName}" />
+			</p>
+			<p>
+				<label for="middleInitial">Middle Initial:</label> <input
+					id="middleInitial" type="text" th:value="*{middleInitial}"
+					th:field="*{middleInitial}" />
+			</p>
+			<p>
+				<label for="lastName">Last Name:</label> <input id="lastName"
+					type="text" th:value="*{lastName}" th:field="*{lastName}" />
+			</p>
+			<p>
+				<label for="university">University:</label> <input id="university"
+					type="text" th:value="*{university}" th:field="*{university}" />
+			</p>
+			<p>
+				<label for="picture">Picture URL:</label> <input id="picture"
+					type="text" th:value="*{picture}" th:field="*{picture}" />
+			</p>
+			<p>
+				<input type="submit" value="Submit"/>
+			</p>
+		</form>
+
+	</div>
 </body>
 </html>
