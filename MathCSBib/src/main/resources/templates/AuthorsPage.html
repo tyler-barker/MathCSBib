@@ -32,8 +32,9 @@
 		<div class="hr">
 			<hr />
 		</div>
-
+		<div th:if="${#httpServletRequest.userPrincipal != null}">
 		<a href="/authors/newAuthor">Add new author</a>
+		</div>
 
 	</div>
 

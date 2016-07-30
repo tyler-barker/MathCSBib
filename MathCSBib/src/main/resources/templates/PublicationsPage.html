@@ -32,8 +32,9 @@
 		<div class="hr">
 			<hr />
 		</div>
-
-		<a href="/publications/newPublication">Add new publication</a>
+		<div th:if="${#httpServletRequest.userPrincipal != null}">
+			<a href="/publications/newPublication">Add new publication</a>
+		</div>
 
 	</div>
 

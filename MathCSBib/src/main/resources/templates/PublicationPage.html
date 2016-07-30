@@ -29,25 +29,31 @@
 			th:href="@{{url}(url=${publication.url})}"><span
 			th:text="${publication.url}"></span></a><br></br> Topics: <span
 			th:each="topic : ${publication.topics}">[[${topic.name}]]</span>
-		<form th:object="${topic}"
-			th:action="@{/publications/{id}/topics(id=${publication.pubId})}"
-			method="post">
-			<p>
-				<label for="topic">Add Topic:</label> <input id="topic" type="text"
-					th:field="*{name}" />
-			</p>
-			<input type="submit" value="Submit" />
-		</form>
+		<div th:if="${#httpServletRequest.userPrincipal != null}">
+			<form th:object="${topic}"
+				th:action="@{/publications/{id}/topics(id=${publication.pubId})}"
+				method="post">
+				<p>
+					<label for="topic">Add Topic:</label> <input id="topic" type="text"
+						th:field="*{name}" />
+				</p>
+				<input type="submit" value="Submit" />
+			</form>
+		</div>
 	</div>
 
-	<form th:action="@{/publications/{id}/update(id=${publication.pubId})}"
-		method="get">
-		<button type="submit">Update Publication</button>
-	</form>
-	<form th:action="@{/publications/{id}/delete(id=${publication.pubId})}"
-		method="post">
-		<button type="submit">Delete Publication</button>
-	</form>
+	<div th:if="${#httpServletRequest.userPrincipal != null}">
+		<form
+			th:action="@{/publications/{id}/update(id=${publication.pubId})}"
+			method="get">
+			<button type="submit">Update Publication</button>
+		</form>
+		<form
+			th:action="@{/publications/{id}/delete(id=${publication.pubId})}"
+			method="post">
+			<button type="submit">Delete Publication</button>
+		</form>
+	</div>
 
 </body>
 </html>

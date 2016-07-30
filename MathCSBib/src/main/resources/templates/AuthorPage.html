@@ -75,6 +75,7 @@
 		</div>
 
 	</div>
+	<div th:if="${#httpServletRequest.userPrincipal != null}">
 	<form th:action="@{/authors/{id}/update(id=${author.authorId})}"
 		method="get">
 		<button type="submit">Update Author</button>
@@ -83,5 +84,6 @@
 		method="post">
 		<button type="submit">Delete Author</button>
 	</form>
+	</div>
 </body>
 </html>
