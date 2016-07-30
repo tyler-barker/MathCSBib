@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"></meta>
+<title>Topics</title>
+<link th:href="@{~/mainStyle.css}" rel="stylesheet" type="text/css" /> 
+</head>
+<body th:inline="text">
+
+<div id="navigation">
+<table>
+<tr>
+<td><a th:href="@{~/}">Home</a></td>
+<td><a th:href="@{~/publications}">Publications</a></td>
+<td><a th:href="@{~/authors}">Authors</a></td>
+<td><a th:href="@{~/topics}">Topics</a></td>
+</tr>
+</table>
+
+</div>
+
+<div id="main">
+
+	<h1>Topics</h1>
+	<table>
+	<tr th:each="topic : ${topics}">
+		<td> <a th:href="@{/topics/{id}(id=${topic.topicId})}">[[${topic.name}]]</a></td>
+    </tr>
+    </table>
+    
+</div>
+
+
+</body>
+</html>

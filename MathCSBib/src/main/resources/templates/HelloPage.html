@@ -3,28 +3,29 @@
 <head>
 <meta charset="ISO-8859-1"></meta>
 <title>Insert title here</title>
-<link th:href="@{~/mainStyle.css}" rel="stylesheet" type="text/css" /> 
+<link th:href="@{~/mainStyle.css}" rel="stylesheet" type="text/css" />
 </head>
 <body th:inline="text">
 </head>
 <body>
 
-<div id="navigation">
-<table>
-<tr>
-<td><a th:href="@{~/}">Home</a></td>
-<td><a th:href="@{~/publications}">Publications</a></td>
-<td><a th:href="@{~/authors}">Authors</a></td>
-</tr>
-</table>
+	<div id="navigation">
+		<table>
+			<tr>
+				<td><a th:href="@{~/}">Home</a></td>
+				<td><a th:href="@{~/publications}">Publications</a></td>
+				<td><a th:href="@{~/authors}">Authors</a></td>
+				<td><a th:href="@{~/topics}">Topics</a></td>
+			</tr>
+		</table>
 
-</div>
+	</div>
 
-<div id="main">
-	<h1>Spring MVC Hello World Annotation Example</h1>
+	<div id="main">
+		<h1>Spring MVC Hello World Annotation Example</h1>
 
-	Message <span th:text="${msg}"></span>
+		Message <span th:text="${msg}"></span>
 
-</div>
+	</div>
 </body>
 </html>

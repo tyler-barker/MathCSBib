@@ -26,6 +26,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 			 "/publications/*", 
                 			 "/authors",
                 			 "/authors/*",
+                			 "/topics",
+                			 "/topics/*",
                 			 "/register",
                 			 "/mainStyle.css")
                 .permitAll()
