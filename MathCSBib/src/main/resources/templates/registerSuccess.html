@@ -1,8 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>REGISTER SUCCESS</title>
-    </head>
-<body>
+<head>
+<title>REGISTER SUCCESS</title>
+<link th:href="@{~/mainStyle.css}" rel="stylesheet" type="text/css" />
+</head>
+<body th:inline="text">
+
+	<div id="navigation">
+		<table>
+			<tr>
+				<td><a th:href="@{~/}">Home</a></td>
+				<td><a th:href="@{~/publications}">Publications</a></td>
+				<td><a th:href="@{~/authors}">Authors</a></td>
+			</tr>
+		</table>
+
+	</div>
+
 </body>
 </html>
