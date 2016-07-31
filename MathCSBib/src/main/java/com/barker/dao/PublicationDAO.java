@@ -1,10 +1,12 @@
 package com.barker.dao;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -99,6 +101,10 @@ public class PublicationDAO {
 		return new HashSet<Topic>(sf.getCurrentSession().createQuery("from Topic").list());
 	}
 	
+	public Topic getTopic(long id) {
+		return (Topic) sf.getCurrentSession().get(Topic.class, id);
+	}
+	
 	public Topic findTopicByName(String name) {
 		for (Topic topic : getTopics()) {
 			if (topic.getName().equalsIgnoreCase(name))
@@ -109,6 +115,13 @@ public class PublicationDAO {
 	
 	public void saveTopic(Topic topic) {
 		sf.getCurrentSession().saveOrUpdate(topic);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Set<Publication> getPublicationsByTopic(long topicId) {
+		return new HashSet<Publication>(sf.getCurrentSession().createCriteria(Publication.class)
+				.createCriteria("topics")
+				.add(Restrictions.eq("topicId", topicId)).list());
 	}
 
 }
