@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.barker.model.Author;
 import com.barker.model.Publication;
 import com.barker.model.Topic;
+import com.barker.model.User;
 
 @Repository
 @Transactional
@@ -121,6 +122,19 @@ public class PublicationDAO {
 		return new HashSet<Publication>(sf.getCurrentSession().createCriteria(Publication.class)
 				.createCriteria("topics")
 				.add(Restrictions.eq("topicId", topicId)).list());
+	}
+	
+	public void favoritePublication(long pubId, long userId) {
+		Session session = sf.getCurrentSession();
+		User user = (User) session.get(User.class, userId);
+		Publication pub = (Publication) session.get(Publication.class, pubId);
+		user.getFavorites().add(pub);
+		session.update(user);
+	}
+	
+	public Set<Publication> getFavoritePublications(long id) {
+		User user = (User) sf.getCurrentSession().get(User.class, id);
+		return user.getFavorites();
 	}
 
 }

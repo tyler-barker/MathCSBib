@@ -8,15 +8,20 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.barker.dao.PublicationDAO;
 import com.barker.dao.UserRepository;
 import com.barker.model.User;
 import com.barker.service.UserService;
 
 @Controller
 public class UserController {
+	
+	@Autowired
+	private PublicationDAO pubDAO;
 	
 	@Autowired
 	private UserRepository userRepo;
@@ -49,6 +54,14 @@ public class UserController {
 	public String getUser(Model model, HttpServletRequest request) {
 		User currentUser = userRepo.findOneByUserName(request.getUserPrincipal().getName());
 		model.addAttribute("currentUser", currentUser);
+		model.addAttribute("publications", pubDAO.getFavoritePublications(currentUser.getId()));
 		return "UserPage";
+	}
+	
+	@RequestMapping(value="/user/favorite/{pubId}", method=RequestMethod.POST)
+	public String addPublication(@PathVariable("pubId") long pubId, Model model, HttpServletRequest request) {
+		User currentUser = userRepo.findOneByUserName(request.getUserPrincipal().getName());
+		pubDAO.favoritePublication(pubId, currentUser.getId());
+		return "redirect:/publications/"+ Long.toString(pubId);
 	}
 }

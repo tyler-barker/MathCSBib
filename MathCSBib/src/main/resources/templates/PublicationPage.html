@@ -44,6 +44,11 @@
 
 	<div th:if="${#httpServletRequest.userPrincipal != null}">
 		<form
+			th:action="@{/user/favorite/{id}(id=${publication.pubId})}"
+			method="post">
+			<button type="submit">Add Publication to Profile</button>
+		</form>
+		<form
 			th:action="@{/publications/{id}/update(id=${publication.pubId})}"
 			method="get">
 			<button type="submit">Update Publication</button>

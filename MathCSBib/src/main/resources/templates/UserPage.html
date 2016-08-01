@@ -23,6 +23,14 @@
 		<h1>User</h1>
 
 		Username: <span th:text="${currentUser.userName}"></span>
+		
+		<h3>Saved Publications</h3>
+			<table>
+				<tr th:each="pub : ${publications}">
+					<td><a th:href="@{/publications/{id}(id=${pub.pubId})}">[[${pub.title}]]</a></td>
+
+				</tr>
+			</table>
 
 	</div>
 >
