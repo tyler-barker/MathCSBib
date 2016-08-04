@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.barker.dao.AuthorDAO;
 import com.barker.model.Author;
+import com.barker.repository.AuthorRepository;
 
 @Controller
 @RequestMapping("/authors")
 public class AuthorController {
 	
 	@Autowired
-	private AuthorDAO authorDAO;
+	private AuthorRepository authorRepo;
 	
 	@RequestMapping(value="/newAuthor", method=RequestMethod.GET)
 	public String getNewAuthorForm(Model model) {
@@ -27,42 +27,42 @@ public class AuthorController {
 	@RequestMapping(value="/newAuthor", method=RequestMethod.POST)
 	public String addAuthor(@ModelAttribute("newAuthor") Author newAuthor, Model model) {
 		model.addAttribute("newAuthor", newAuthor);
-		authorDAO.save(newAuthor);
+		authorRepo.save(newAuthor);
 		return "AuthorAdded";
 	}
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public String getAuthors(Model model) {
-		model.addAttribute("authors", authorDAO.getAuthors());
+		model.addAttribute("authors", authorRepo.findAll());
 		return "AuthorsPage";
 	}
 	
 	@RequestMapping("/{authorId}")
-	public String getAuthor(@PathVariable("authorId") long authorId, Model model) {
-		Author author = authorDAO.getAuthor(authorId);
+	public String getAuthor(@PathVariable("authorId") Long authorId, Model model) {
+		Author author = authorRepo.findOne(authorId);
 		model.addAttribute("author", author);
-		model.addAttribute("publications", authorDAO.getPublicationsFromAuthor(authorId));
+		model.addAttribute("publications", author.getPublications());
 		return "AuthorPage";
 	}
 	
 	@RequestMapping(value="/{authorId}/update", method=RequestMethod.GET)
-	public String updateAuthor(@PathVariable("authorId") long authorId, Model model) {
-		Author author = authorDAO.getAuthor(authorId);
+	public String updateAuthor(@PathVariable("authorId") Long authorId, Model model) {
+		Author author = authorRepo.findOne(authorId);
 		model.addAttribute("author", author);
 		return "AuthorUpdatePage";
 	}
 	
 	@RequestMapping(value="/{authorId}/update", method=RequestMethod.POST)
 	public String updateComplete(@ModelAttribute("author") Author author, Model model) {
-		authorDAO.update(author);
+		authorRepo.save(author);
 		return "redirect:/authors/"+ Long.toString(author.getAuthorId());
 	}
 	
 	
 	
 	@RequestMapping(value="/{authorId}/delete", method=RequestMethod.POST)
-	public String deleteAuthor(@PathVariable("authorId") long authorId, Model model) {
-		authorDAO.delete(authorId);
+	public String deleteAuthor(@PathVariable("authorId") Long authorId, Model model) {
+		authorRepo.delete(authorRepo.findOne(authorId));
 		return "DeletedAuthorPage";
 	}
 

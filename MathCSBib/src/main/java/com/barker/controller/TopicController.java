@@ -7,27 +7,27 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.barker.dao.PublicationDAO;
 import com.barker.model.Topic;
+import com.barker.repository.TopicRepository;
 
 @Controller
 @RequestMapping("/topics")
 public class TopicController {
 	
 	@Autowired
-	private PublicationDAO pubDAO;
+	private TopicRepository topicRepo;
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public String getTopics(Model model) {
-		model.addAttribute("topics", pubDAO.getTopics());
+		model.addAttribute("topics", topicRepo.findAll());
 		return "TopicsPage";
 	}
 	
 	@RequestMapping("/{topicId}")
-	public String getTopic(@PathVariable("topicId") long topicId, Model model) {
-		Topic topic = pubDAO.getTopic(topicId);
+	public String getTopic(@PathVariable("topicId") Long topicId, Model model) {
+		Topic topic = topicRepo.findOne(topicId);
 		model.addAttribute("topic", topic);
-		model.addAttribute("publications", pubDAO.getPublicationsByTopic(topicId));
+		model.addAttribute("publications", topicRepo.findPublicationsByTopic(topic));
 		return "TopicPage";
 	}
 	

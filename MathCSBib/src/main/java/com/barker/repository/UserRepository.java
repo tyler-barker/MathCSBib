@@ -1,4 +1,4 @@
-package com.barker.dao;
+package com.barker.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

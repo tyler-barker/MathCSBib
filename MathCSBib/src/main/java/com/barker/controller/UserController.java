@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.barker.dao.PublicationDAO;
-import com.barker.dao.UserRepository;
 import com.barker.model.User;
+import com.barker.repository.PublicationRepository;
+import com.barker.repository.UserRepository;
 import com.barker.service.UserService;
 
 @Controller
 public class UserController {
 	
 	@Autowired
-	private PublicationDAO pubDAO;
+	private PublicationRepository pubRepo;
 	
 	@Autowired
 	private UserRepository userRepo;
@@ -54,14 +54,15 @@ public class UserController {
 	public String getUser(Model model, HttpServletRequest request) {
 		User currentUser = userRepo.findOneByUserName(request.getUserPrincipal().getName());
 		model.addAttribute("currentUser", currentUser);
-		model.addAttribute("publications", pubDAO.getFavoritePublications(currentUser.getId()));
+		model.addAttribute("publications", currentUser.getFavorites());
 		return "UserPage";
 	}
 	
 	@RequestMapping(value="/user/favorite/{pubId}", method=RequestMethod.POST)
-	public String addPublication(@PathVariable("pubId") long pubId, Model model, HttpServletRequest request) {
+	public String addPublication(@PathVariable("pubId") Long pubId, Model model, HttpServletRequest request) {
 		User currentUser = userRepo.findOneByUserName(request.getUserPrincipal().getName());
-		pubDAO.favoritePublication(pubId, currentUser.getId());
+		currentUser.getFavorites().add(pubRepo.findOne(pubId));
+		userRepo.save(currentUser);
 		return "redirect:/publications/"+ Long.toString(pubId);
 	}
 }

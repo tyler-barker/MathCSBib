@@ -8,14 +8,14 @@ import javax.persistence.Id;
 public class Topic {
 
 	@Id @GeneratedValue
-	private long topicId;
+	private Long topicId;
 	private String name;
 	
-	public long getTopicId() {
+	public Long getTopicId() {
 		return topicId;
 	}
 
-	public void setTopicId(long topicId) {
+	public void setTopicId(Long topicId) {
 		this.topicId = topicId;
 	}
 

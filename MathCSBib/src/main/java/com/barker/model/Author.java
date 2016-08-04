@@ -3,8 +3,8 @@ package com.barker.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -16,16 +16,18 @@ public class Author {
 	private String lastName;
 	private String middleInitial;
 	@Id @GeneratedValue
-	private long authorId;
-	@ManyToMany(fetch = FetchType.EAGER)
+	private Long authorId;
+	
+	//(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToMany
 	private Set<Publication> publications = new HashSet<Publication>();
 	private String picture;
 	private String university;
 	
-	public long getAuthorId() {
+	public Long getAuthorId() {
 		return authorId;
 	}
-	public void setAuthorId(long authorId) {
+	public void setAuthorId(Long authorId) {
 		this.authorId = authorId;
 	}
 	
