@@ -3,7 +3,6 @@ package com.barker.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -18,7 +17,6 @@ public class Author {
 	@Id @GeneratedValue
 	private Long authorId;
 	
-	//(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@ManyToMany
 	private Set<Publication> publications = new HashSet<Publication>();
 	private String picture;
