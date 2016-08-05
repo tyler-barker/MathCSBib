@@ -34,8 +34,6 @@ public class PublicationController {
 	public String getNewPublicationForm(Model model) {
 		model.addAttribute("newPublication", new Publication());
 		model.addAttribute("authorList", authorRepo.findAll());
-		//model.addAttribute("addedAuthors", new ArrayList<Long>());
-		//model.addAttribute("firstAuthorId", 0);
 		return "NewPublicationForm";
 	}
 	

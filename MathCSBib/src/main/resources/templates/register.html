@@ -29,16 +29,24 @@
 				<div th:if="${#fields.hasErrors('password')}"
 					th:errors="*{password}">Password error</div>
 			</div>
-
-			<input type="text" id="inputUser" name="userName"
-				class="form-control middle" placeholder="Username"
-				required="required" /> 
-				
-			<input type="password" id="inputPassword"
-				name="password" class="form-control bottom" placeholder="Password"
-				required="required" />
-
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+			<p>
+				<input type="text" id="inputUser" name="userName"
+					class="form-control middle" placeholder="Username"
+					required="required" />
+			</p>
+			<p>
+				<input type="password" id="inputPassword" name="password"
+					class="form-control bottom" placeholder="Password"
+					required="required" />
+			</p>
+			<p>
+				<input type="password" id="verifyPassword" name="confirmPassword"
+					class="form-control bottom" placeholder="Verify Password"
+					required="required" />
+			</p>
+			<p>
+				<button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+			</p>
 		</form>
 	</div>
 </body>

@@ -41,6 +41,10 @@ public class UserController {
 	public String registerPost(@Valid User user, BindingResult result) {
 		if (result.hasErrors())
 			return "register";
+		if (!user.isMatchingPasswords()) {
+			result.rejectValue("password", "error.mismatchedPasswords", "The passwords do not match");
+			return "register";
+		}
 		User registeredUser = userService.register(user);
 		if (registeredUser != null)
 			return "registerSuccess";

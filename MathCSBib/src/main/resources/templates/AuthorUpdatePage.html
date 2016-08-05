@@ -25,7 +25,7 @@
 		<h3>Update Author</h3>
 
 		<form action="#" th:object="${author}"
-			th:action="@{/authors/{id}/update(id=${author.authorId})}"
+			th:action="@{/authors/update}"
 			method="post">
 			<input type="hidden" th:value="*{authorId}" th:field="*{authorId}" />
 			<input type="hidden" th:value="*{publications}"

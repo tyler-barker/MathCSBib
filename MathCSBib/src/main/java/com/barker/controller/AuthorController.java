@@ -52,7 +52,7 @@ public class AuthorController {
 		return "AuthorUpdatePage";
 	}
 	
-	@RequestMapping(value="/{authorId}/update", method=RequestMethod.POST)
+	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public String updateComplete(@ModelAttribute("author") Author author, Model model) {
 		authorRepo.save(author);
 		return "redirect:/authors/"+ Long.toString(author.getAuthorId());
