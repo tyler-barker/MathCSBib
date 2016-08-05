@@ -32,8 +32,8 @@
 		<div class="hr">
 			<hr />
 		</div>
-		<div th:if="${#httpServletRequest.userPrincipal != null}">
-		<a href="/authors/newAuthor">Add new author</a>
+		<div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+		<a href="/authors/admin/newAuthor">Add new author</a>
 		</div>
 
 	</div>

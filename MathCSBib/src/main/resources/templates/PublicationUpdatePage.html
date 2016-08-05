@@ -25,7 +25,7 @@
 		<h3>Update Publication</h3>
 
 		<form action="#" th:object="${publication}"
-			th:action="@{/publications/update}" method="post">
+			th:action="@{/publications/admin/update}" method="post">
 			<input type="hidden" th:value="*{pubId}" th:field="*{pubId}" />
 			<p>
 				<label for="title">Title:</label> <input id="title" type="text"

@@ -36,20 +36,16 @@
 				<td>
 					<table>
 						<tr>
-							<td><bold>First Name:</bold> <span
-								th:text="${author.firstName}"></span></td>
+							<td>First Name: <span th:text="${author.firstName}"></span></td>
 						</tr>
 						<tr>
-							<td><bold>Middle Initial:</bold> <span
-								th:text="${author.middleInitial}"></span></td>
+							<td>Middle Initial:<span th:text="${author.middleInitial}"></span></td>
 						</tr>
 						<tr>
-							<td><bold>Last Name:</bold> <span
-								th:text="${author.lastName}"></span></td>
+							<td>Last Name: <span th:text="${author.lastName}"></span></td>
 						</tr>
 						<tr>
-							<td><bold>University:</bold> <span
-								th:text="${author.university}"></span></td>
+							<td>University: <span th:text="${author.university}"></span></td>
 						</tr>
 
 					</table>
@@ -75,15 +71,17 @@
 		</div>
 
 	</div>
-	<div th:if="${#httpServletRequest.userPrincipal != null}">
-	<form th:action="@{/authors/{id}/update(id=${author.authorId})}"
-		method="get">
-		<button type="submit">Update Author</button>
-	</form>
-	<form th:action="@{/authors/{id}/delete(id=${author.authorId})}"
-		method="post">
-		<button type="submit">Delete Author</button>
-	</form>
+	<div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+		<form th:action="@{/authors/admin/{id}/update(id=${author.authorId})}"
+			method="get">
+			<button type="submit">Update Author</button>
+		</form>
+
+		<form th:action="@{/authors/admin/{id}/delete(id=${author.authorId})}"
+			method="post">
+			<button type="submit">Delete Author</button>
+		</form>
+
 	</div>
 </body>
 </html>

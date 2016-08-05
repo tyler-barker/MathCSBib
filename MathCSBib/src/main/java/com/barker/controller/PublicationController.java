@@ -30,14 +30,14 @@ public class PublicationController {
 	@Autowired
 	private TopicRepository topicRepo;
 	
-	@RequestMapping(value="/newPublication", method=RequestMethod.GET)
+	@RequestMapping(value="/admin/newPublication", method=RequestMethod.GET)
 	public String getNewPublicationForm(Model model) {
 		model.addAttribute("newPublication", new Publication());
 		model.addAttribute("authorList", authorRepo.findAll());
 		return "NewPublicationForm";
 	}
 	
-	@RequestMapping(value="/newPublication", method=RequestMethod.POST)
+	@RequestMapping(value="/admin/newPublication", method=RequestMethod.POST)
 	public String addPublication(@ModelAttribute("newPublication") Publication newPublication, 
 							Model model) {
 		Publication publicationToAdd = new Publication();
@@ -73,7 +73,7 @@ public class PublicationController {
 		return "PublicationPage";
 	}
 	
-	@RequestMapping(value="/{pubId}/update", method=RequestMethod.GET)
+	@RequestMapping(value="/admin/{pubId}/update", method=RequestMethod.GET)
 	public String updatePublication(@PathVariable("pubId") Long pubId, Model model) {
 		model.addAttribute("authorList", authorRepo.findAll());
 		Publication publication = pubRepo.findOne(pubId);
@@ -81,7 +81,7 @@ public class PublicationController {
 		return "PublicationUpdatePage";
 	}
 	
-	@RequestMapping(value="/update", method=RequestMethod.POST)
+	@RequestMapping(value="/admin/update", method=RequestMethod.POST)
 	public String updateComplete(@ModelAttribute("publication") Publication pub,
 								 Model model) {
 		Publication updatedPub = pubRepo.findOne(pub.getPubId());
@@ -100,7 +100,7 @@ public class PublicationController {
 		return "redirect:/publications/"+ Long.toString(pub.getPubId());
 	}
 	
-	@RequestMapping(value="/{pubId}/delete", method=RequestMethod.POST)
+	@RequestMapping(value="/admin/{pubId}/delete", method=RequestMethod.POST)
 	public String deletePublication(@PathVariable("pubId")Long pubId, Model model) {
 		Publication pub = pubRepo.findOne(pubId);
 		for (Author author : pub.getAuthors())
@@ -110,7 +110,7 @@ public class PublicationController {
 		return "DeletedPublicationPage";
 	}
 	
-	@RequestMapping(value="/{pubId}/topics", method=RequestMethod.POST)
+	@RequestMapping(value="/admin/{pubId}/topics", method=RequestMethod.POST)
 	public String addTopic(@PathVariable("pubId") Long pubId, 
 						   @ModelAttribute("topic") Topic newTopic,
 						   Model model) {

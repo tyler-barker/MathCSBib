@@ -31,6 +31,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 			 "/register",
                 			 "/mainStyle.css")
                 .permitAll()
+                .antMatchers("/authors/admin/**",
+                			 "/publications/admin/**")
+                .hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
             .formLogin()

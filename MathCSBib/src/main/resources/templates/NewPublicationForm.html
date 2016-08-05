@@ -25,7 +25,7 @@
 		<h3>Add A New Publication</h3>
 
 		<form action="#" th:object="${newPublication}"
-			th:action="@{/publications/newPublication}" method="post">
+			th:action="@{/publications/admin/newPublication}" method="post">
 			<p>
 				<label for="title">Title:</label> <input id="title" type="text"
 					th:field="*{title}" />
