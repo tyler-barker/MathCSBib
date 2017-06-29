@@ -1,15 +1,21 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/mathcsbibdb
-    username: postgres
-    password: password
+    url: --
+    username: --
+    password: --
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     properties:
       hibernate:
         current_session_context_class: org.springframework.orm.hibernate4.SpringSessionContext
   resources:
     chain:
       enabled: true
+      
+sendgrid:
+  credentials:
+    hostname: smtp.sendgrid.net
+    username: -- 
+    password: --
 
