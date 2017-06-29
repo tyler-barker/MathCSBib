@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.barker.model.User;
 import com.barker.repository.PublicationRepository;
 import com.barker.repository.UserRepository;
+import com.barker.service.MailService;
 import com.barker.service.UserService;
 
 @Controller
@@ -28,6 +29,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private MailService mailService;
 	
 	@Autowired
     protected AuthenticationManager authenticationManager;
@@ -45,9 +49,15 @@ public class UserController {
 			result.rejectValue("password", "error.mismatchedPasswords", "The passwords do not match");
 			return "register";
 		}
+		if (!user.validateEmail()) {
+			result.rejectValue("email", "error.invalidEmail", "The email address is not valid");
+			return "register";
+		}
 		User registeredUser = userService.register(user);
-		if (registeredUser != null)
+		if (registeredUser != null) {
+			mailService.sendWelcomeEmail(user.getUserName(), user.getEmail());
 			return "registerSuccess";
+		}
 		else {
 			result.rejectValue("username", "error.alreadyExists", "This username already exists.");
 			return "register";

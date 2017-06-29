@@ -1,0 +1,10 @@
+---
+applications:
+- name: MathCSBib
+  memory: 1024M
+  buildpack: java_buildpack
+  domain: cfapps.io
+  
+services:
+ - mathcsbibdb
+ - mathcsbibmail
