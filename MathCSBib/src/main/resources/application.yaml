@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: --
-    username: --
-    password: --
+    url: jdbc:localhost:5432/mathcsbibdb
+    username: username
+    password: password
   jpa:
     hibernate:
       ddl-auto: validate
@@ -16,6 +16,9 @@ spring:
 sendgrid:
   credentials:
     hostname: smtp.sendgrid.net
-    username: -- 
-    password: --
+    username: username
+    password: password
+    
+server:
+  port: 9000
 
